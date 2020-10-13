@@ -23,28 +23,24 @@ def LOG_DEBUG(*args):
 
 def LOG_TRACE(exc=None):
     import traceback
-    print('=') * 25
+    print '=' * 25
     if exc is not None:
         LOG_ERROR(exc)
         traceback.print_exc()
     else:
         traceback.print_stack()
-    print('=') * 25
+    print '=' * 25
 
 
-def LOG_DIR(object, include=None, exclude=None):
-    print('=') * 25
-    for attr in dir(object):
+def LOG_DIR(obj, include=None, exclude=None):
+    print '=' * 25
+    for attr in dir(obj):
         if (include is None or attr.find(include) >= 0) and (exclude is None or attr.find(exclude) == -1):
-            try:
-                LOG('GUIFlash: [DIR]', 'object.%s = %s' % (attr, getattr(object, attr)))
-            except:
-                LOG('GUIFlash: [DIR]', 'object.%s = %s' % (attr, '<error>'))
-    print('=') * 25
+            LOG('GUIFlash: [DIR]', 'object.%s = %s' % (attr, getattr(obj, attr, '<error>')))
+    print '=' * 25
 
 
 def debugLog(func):
-
     def wrapper(*args, **kwargs):
         try:
             func(*args, **kwargs)
@@ -56,7 +52,6 @@ def debugLog(func):
 
 
 def debugTime(func):
-
     def wrapper(*args, **kwargs):
         import time
         startTime = time.time()
@@ -80,14 +75,14 @@ class EventHook(object):
             self.__handlers.remove(handler)
         return self
 
-    def fire(self, *args, **keywargs):
+    def fire(self, *a, **k):
         for handler in self.__handlers:
-            handler(*args, **keywargs)
+            handler(*a, **k)
 
     def clearObjectHandlers(self, inObject):
         for theHandler in self.__handlers:
             if theHandler.im_self == inObject:
-                self -= theHandler
+                self.__isub__(theHandler)
 
 
 def _RegisterEvent(handler, cls, method, prepend=False):
@@ -113,7 +108,7 @@ def __event_handler(prepend, e, m, *a, **k):
             r = m(*a, **k)
             e.fire(*a, **k)
         return r
-    except:
+    except Exception:
         LOG_TRACE(__file__)
 
 
@@ -144,9 +139,7 @@ def _OverrideClassMethod(handler, cls, method):
 
 
 def _hook_decorator(func):
-
     def decorator1(*a, **k):
-
         def decorator2(handler):
             func(handler, *a, **k)
 

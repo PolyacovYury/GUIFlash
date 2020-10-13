@@ -57,13 +57,8 @@
   <!-- External Libraries -->
   <externalLibraryPaths>
     <element path="swc\wg\base_app-1.0-SNAPSHOT.swc" />
-    <element path="swc\wg\battle.swc" />
-    <element path="swc\wg\common_i18n_library-1.0-SNAPSHOT.swc" />
     <element path="swc\wg\common-1.0-SNAPSHOT.swc" />
     <element path="swc\wg\gui_base-1.0-SNAPSHOT.swc" />
-    <element path="swc\wg\gui_battle-1.0-SNAPSHOT.swc" />
-    <element path="swc\wg\gui_lobby-1.0-SNAPSHOT.swc" />
-    <element path="swc\wg\lobby.swc" />
   </externalLibraryPaths>
   <!-- Runtime Shared Libraries -->
   <rslPaths>

@@ -2,14 +2,12 @@
 {
 	import flash.display.DisplayObject;
 	import flash.display.DisplayObjectContainer;
-	
 	import net.gambiter.utils.Components;
 	import net.gambiter.utils.Properties;
-	
-	import net.wg.infrastructure.managers.impl.ContainerManagerBase;
+	import net.wg.data.constants.generated.LAYER_NAMES;
 	import net.wg.gui.components.containers.MainViewContainer;
 	import net.wg.infrastructure.base.AbstractView;
-	import net.wg.data.constants.generated.APP_CONTAINERS_NAMES;
+	import net.wg.infrastructure.managers.impl.ContainerManagerBase;
 	
 	public class FlashUI extends AbstractView
 	{
@@ -68,7 +66,7 @@
 			try
 			{
 				parent.removeChild(this);
-				viewContainer = (App.containerMgr as ContainerManagerBase).containersMap[APP_CONTAINERS_NAMES.VIEWS];
+				viewContainer = (App.containerMgr as ContainerManagerBase).getContainer(LAYER_NAMES.LAYER_ORDER.indexOf(LAYER_NAMES.VIEWS)) as MainViewContainer;
 				viewContainer.setFocusedView(viewContainer.getTopmostView());
 				viewPage = viewContainer.getChildByName(NAME_MAIN) as DisplayObjectContainer;
 			}
